@@ -1,0 +1,13 @@
+<map id="my_lib/include/my_lib/my_lib.hpp" name="my_lib/include/my_lib/my_lib.hpp">
+<area shape="rect" id="node1" title="A simple C++ header file containing two classes with a bidirectional aggregation relationship...." alt="" coords="334,5,499,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="489,169,569,196"/>
+<area shape="rect" id="node3" title=" " alt="" coords="159,95,237,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="261,95,319,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="344,95,404,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="428,95,491,121"/>
+<area shape="rect" id="node7" href="$solver_8hpp.html" title="Example of a class that solves a linear system of equations using Eigen. Created with ChatGPT&#45;4." alt="" coords="5,95,135,121"/>
+<area shape="rect" id="node9" href="$package__info_8hpp_source.html" title=" " alt="" coords="566,95,742,121"/>
+<area shape="rect" id="node11" title=" " alt="" coords="767,95,856,121"/>
+<area shape="rect" id="node8" title=" " alt="" coords="19,169,121,196"/>
+<area shape="rect" id="node10" title=" " alt="" coords="603,169,705,196"/>
+</map>

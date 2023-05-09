@@ -1,0 +1,4 @@
+<map id="my_lib/include/my_lib/core/solver.hpp" name="my_lib/include/my_lib/core/solver.hpp">
+<area shape="rect" id="node1" title="Example of a class that solves a linear system of equations using Eigen. Created with ChatGPT&#45;4." alt="" coords="5,5,171,47"/>
+<area shape="rect" id="node2" href="$my__lib_8hpp.html" title="A simple C++ header file containing two classes with a bidirectional aggregation relationship...." alt="" coords="5,95,171,136"/>
+</map>
