@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  release:
+    types: [published]
+
+
+jobs:
+  build-deploy-docs:
+    name: Build and publish documentation
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo's default branch
+      uses: actions/checkout@v3
+    - name: Setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - name: Install conan, cmake and cppcheck
+      run: |
+        pip install conan
+        pip install cmake
+        sudo apt-get install doxygen graphviz
+    - name: Install with conan
+      run: |
+        conan config install .conan
+        conan install . --build=missing  -pr:h=ubuntu-gcc12-amd64 -pr:h=build-release -pr:h=options-doc  -pr:b=ubuntu-gcc12-amd64 -pr:b=build-release -pr:b=options-doc
+        cmake --preset=conan-release
+
+    - name: Build docs
+      run: |
+        cmake --build build/Release --target doc -j4
+
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        build_dir: ./build/Release/html_docs

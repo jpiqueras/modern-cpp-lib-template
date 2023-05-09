@@ -1,0 +1,7 @@
+[settings]
+build_type = Debug
+
+# In the future you might want to set this only for msvc
+{% if platform.system()=="Windows" %}
+compiler.runtime_type = Debug
+{% endif %}

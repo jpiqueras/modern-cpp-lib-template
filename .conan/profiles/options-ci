@@ -1,0 +1,17 @@
+# Options for the CI build. All options enabled except for:
+#  - Docs: Docs are build in a dedicated action.
+#  - IWYU: Is broken
+#  - CLANG-TIDY and CPPCHECK: Static analysis is done in a dedicated action
+#  - Coverage: In a dedicated CI
+[options]
+LIB_OPTION_LIBRARY = True
+LIB_OPTION_LTO = True
+LIB_OPTION_DOCS = False
+LIB_OPTION_WARNINGS = True
+LIB_OPTION_WARNINGS_AS_ERRORS = True
+LIB_OPTION_COVERAGE = False
+LIB_OPTION_INCLUDE_WHAT_YOU_USE = False
+LIB_OPTION_CLANG_TIDY = True
+LIB_OPTION_CPPCHECK = True
+LIB_OPTION_SANITIZE_ADDR = True
+LIB_OPTION_SANITIZE_UNDEF = True

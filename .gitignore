@@ -1,0 +1,4 @@
+build
+CMakeUserPresets.json
+.vscode/*
+my_lib/include/my_lib/config.hpp

@@ -1,0 +1,42 @@
+#pragma once  // NOLINT(clang-diagnostic-pragma-once-outside-header)
+              // clang-tidy in vscode thinks this is a cpp file.
+
+#include <string_view>
+
+// Library name and version
+constexpr std::string_view LIB_NAME = "@LIB_NAME@";
+constexpr std::string_view LIB_VERSION = "@LIB_VERSION@";
+
+// Build type
+#ifdef NDEBUG
+constexpr std::string_view LIB_BUILD_TYPE = "Release";
+#else
+constexpr std::string_view LIB_BUILD_TYPE = "Debug";
+#endif
+
+// Compiler
+#if defined(__clang__)
+constexpr std::string_view LIB_COMPILER_INFO = "Clang";
+constexpr int LIB_COMPILER_VERSION = __clang_major__;
+#elif defined(__GNUC__) || defined(__GNUG__)
+constexpr std::string_view LIB_COMPILER_INFO = "GCC";
+constexpr int LIB_COMPILER_VERSION = __GNUC__;
+#elif defined(_MSC_VER)
+constexpr std::string_view LIB_COMPILER_INFO = "MSVC";
+constexpr int LIB_COMPILER_VERSION = _MSC_VER;
+#elif defined(__INTEL_COMPILER)
+constexpr std::string_view LIB_COMPILER_INFO = "Intel Compiler";
+constexpr int LIB_COMPILER_VERSION = __INTEL_COMPILER;
+#else
+constexpr std::string_view LIB_COMPILER_INFO = "Unknown Compiler";
+constexpr int LIB_COMPILER_VERSION = -1;
+#endif
+
+// C++ standard
+#if defined(_MSVC_LANG)
+constexpr int LIB_CPP_STANDARD = _MSVC_LANG;
+#elif defined(__cplusplus)
+constexpr int LIB_CPP_STANDARD = __cplusplus;
+#else
+constexpr int LIB_CPP_STANDARD = -1;
+#endif

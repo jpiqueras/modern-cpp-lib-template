@@ -1,0 +1,53 @@
+# Test compilation and test in linux/windows 
+
+# Conan options and commands:
+#   conan config install .conan  -> Install the conan profiles I've created in .conan/profiles folder.
+#   --build=missing -> Build packages from source whose binary package is not found.
+#   --profile=<host_profile> --profile:build=<build_profile>  -> conan needs two profiles, otherwise try to fallback to default one
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests-matrix:
+    strategy:
+      fail-fast: False
+      matrix:
+        os: [ubuntu, windows]
+        compiler: [gcc12, clang14, msvc2022]
+        build_type: [release, debug]
+        exclude:
+          - os: windows
+            compiler: gcc12
+          - os: windows
+            compiler: clang14
+          - os: ubuntu
+            compiler: msvc2022
+
+    name: ${{matrix.compiler}} ${{matrix.build_type}} built and tests
+    runs-on: ${{matrix.os}}-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Check out repo's default branch
+      uses: actions/checkout@v3
+    - name: Setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - name: Install conan and cmake
+      run: |
+        pip install conan
+        pip install cmake
+    - name: Install conan profiles
+      run: |
+        conan config install .conan
+    - name: Build and test application in ${{matrix.build_type}} mode
+      run: >        
+        conan create . --build=missing 
+        -pr:h=${{matrix.os}}-${{matrix.compiler}}-amd64 -pr:h=build-${{matrix.build_type}} -pr:h=options-ci 
+        -pr:b=${{matrix.os}}-${{matrix.compiler}}-amd64 -pr:b=build-${{matrix.build_type}} -pr:b=options-ci

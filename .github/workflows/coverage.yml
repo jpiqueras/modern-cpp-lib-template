@@ -1,0 +1,33 @@
+name: Code coverage
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  code-cov:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo's default branch
+      uses: actions/checkout@v3
+    - name: Setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - name: Install conan, cmake and cppcheck
+      run: |
+        pip install conan
+        pip install cmake
+        sudo apt-get install gcovr lcov
+    - name: Install with conan
+      run: |
+        conan config install .conan
+        conan install . --build=missing  -pr:h=ubuntu-gcc12-amd64 -pr:h=build-debug -pr:h=options-coverage  -pr:b=ubuntu-gcc12-amd64 -pr:b=build-debug -pr:b=options-coverage
+        cmake --preset=conan-debug
+    - name: Build
+      run: |
+        cmake --build build/Debug --target coverage -j4
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
