@@ -14,7 +14,7 @@ class my_libRecipe(ConanFile):
 
     # This is the version used everywhere. Right now is set manually,
     # but it could be set automatically from the git tag for example.
-    version = "0.1.0"
+    version = "1.0.1"
 
     # I've followed the instructions from https://docs.conan.io/2/tutorial/creating_packages/other_types_of_packages/header_only_packages.html
     # but without adding the "header-only" keyword to the recipe, it doesn't work. The use of the "header-only" is from here:
