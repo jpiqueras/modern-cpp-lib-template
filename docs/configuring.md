@@ -35,7 +35,8 @@ To do that, first install the **Chocolatey** package manager, and then all the o
 ```bash
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-choco install visualstudio2022buildtools -y --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --includeRecommended"
+choco install visualstudio2022buildtools -y --package-parameters "--includeRecommended --includeOptional"
+choco install visualstudio2022-workload-vctools -y
 
 choco install cmake --installargs 'ADD_CMAKE_TO_PATH=User' -y
 
